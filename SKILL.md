@@ -37,6 +37,8 @@ Use one concise request such as:
 
 The user may provide credentials through an approved secret channel if needed. Never ask them to paste secrets into a public repository, source file, or deployment command.
 
+For a reusable intake form, read [references/release-context.md](references/release-context.md). For a local, read-only Git preflight summary, run `python scripts/release_preflight.py <project-directory>`.
+
 ## 1. Prepare the local release
 
 1. Inspect `git status --short`, remotes, active branch, and the meaningful diff. Preserve unrelated user changes; stage only the files that belong in this release.
@@ -65,6 +67,8 @@ Connect through the alias and read, without exposing environment values:
 - persistent-data paths and available disk space.
 
 Choose the deployment path from evidence.
+
+Read [references/deployment-modes.md](references/deployment-modes.md) before selecting Git checkout, image/container, or targeted incremental deployment.
 
 ### Valid production Git checkout
 

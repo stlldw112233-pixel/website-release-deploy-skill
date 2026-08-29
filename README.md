@@ -16,19 +16,19 @@ The skill is careful about secrets (never committing/printing `.env`, keys, toke
 
 ## Installation
 
-Copy the `SKILL.md` file into your Codex skills directory:
+Clone the complete folder so that Codex can use the Skill, deployment references, and read-only preflight helper together:
 
 ```powershell
 # Windows / typical Codex layout
-New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\skills\website-release-deploy" | Out-Null
-Copy-Item .\SKILL.md "$env:USERPROFILE\.codex\skills\website-release-deploy\SKILL.md"
+git clone https://github.com/stlldw112233-pixel/website-release-deploy-skill `
+  "$env:USERPROFILE\.codex\skills\website-release-deploy"
 ```
 
 On Linux/macOS:
 
 ```bash
-mkdir -p ~/.codex/skills/website-release-deploy
-cp SKILL.md ~/.codex/skills/website-release-deploy/SKILL.md
+git clone https://github.com/stlldw112233-pixel/website-release-deploy-skill \
+  ~/.codex/skills/website-release-deploy
 ```
 
 Then ask Codex to deploy or update a website (e.g. "发布网站" / "push my site to production") and the skill will be picked up automatically.
@@ -43,6 +43,20 @@ The skill will ask for (only if not discoverable) and then walk through:
 - persistent runtime data that must survive deployment.
 
 It ends with a succinct completion report: branch/commit SHA, deployment method, backup location, verification results, and any remaining user-visible check.
+
+## Included resources
+
+- `SKILL.md` — deployment workflow and decision boundaries.
+- `scripts/release_preflight.py` — a read-only local Git summary; it never reads `.env` or contacts production.
+- `references/release-context.md` — the exact four-item intake template used when a deployment request is missing required details.
+- `references/deployment-modes.md` — when to use a normal Git deploy versus a targeted file upload.
+- `agents/openai.yaml` — Skill picker metadata and a ready-to-use prompt.
+
+Run the preflight helper from any Git project:
+
+```bash
+python /path/to/website-release-deploy/scripts/release_preflight.py .
+```
 
 ## Requirements
 

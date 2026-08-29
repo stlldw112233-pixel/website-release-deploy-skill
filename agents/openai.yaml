@@ -1,0 +1,7 @@
+interface:
+  display_name: "Website Release Deploy"
+  short_description: "Safely publish a GitHub website release to production"
+  default_prompt: "Use $website-release-deploy to safely publish my latest website changes to production."
+
+policy:
+  allow_implicit_invocation: true
